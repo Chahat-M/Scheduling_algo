@@ -12,8 +12,7 @@
 
 #include <stdio.h>
 
-void find_completion_time(int size, int arrival[], int burst[], int completion[]){
-    int cst = 1;    // Declaring context switching time in 1 unit
+void find_completion_time(int size, int arrival[], int burst[], int completion[], int cst){
     completion[0] = burst[0] + cst;   // Completion time of first process remains same as burst time
     for(int i = 1; i < size; i++){
         if( arrival[i] <= completion[i-1]){
@@ -68,12 +67,13 @@ void find_response_time(int size, int waiting[], int response[]){
 
 // Driver code
 int main(){
-    int size;
+    int size,cst;
     int process[size];
     int arrival[size];
     int burst[size];
 
-    printf("Considering context switching time of 1 unit");
+    printf("Enter context switching time: ");
+    scanf("%d",&cst);
     printf("\nEnter number of processes: ");
     scanf("%d", &size);
     for(int i = 0; i < size; i++){
@@ -115,7 +115,7 @@ int main(){
         }
     }
 
-    find_completion_time(size, arrival, burst, completion);
+    find_completion_time(size, arrival, burst, completion, cst);
     double avg_tat = find_turn_around_time(size, arrival, completion, tat);
     double avg_waiting = find_waiting_time(size, burst, tat, waiting);
     find_response_time(size, waiting, response);
