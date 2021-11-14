@@ -98,7 +98,7 @@ int main(){
     // Sorting the processes available in ready queue on the basis of burst time
     for(int i = 1; i < size; i++){
         for(int j = i+1; j < size; j++){
-            if(arrival[i] < completion[i-1] && burst[i] < burst[j]){
+            if(arrival[i] < completion[i-1] && burst[i] < burst[j] && arrival[j] < completion[i-1]){
                 // swaping elements in arrival array
                 temp = arrival[j];
                 arrival[j] = arrival[i];
